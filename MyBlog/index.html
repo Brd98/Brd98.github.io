@@ -18,7 +18,7 @@
 
     <script>
         const params = new URLSearchParams(window.location.search);
-        const post = params.get("post") || "posts/post1.md";
+        const post = params.get("post") || "posts/testpost.md";
 
         fetch(post)
         .then(response => {
