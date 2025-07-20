@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="assets/marked.min.js"></script>
     <title>My blog</title>
 </head>
@@ -20,5 +19,24 @@
         <h2 class="posts" id="postOne"></h2>
         <p></p>
     </div>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const post = params.get("post") || "posts/post1.md";
+
+        fetch(post)
+        .then(response => {
+            if (!response.ok) throw new Error("Post not found");
+            return response.text();
+        })
+        .then(markdown => {
+            document.getElementById("content").innerHTML = marked.parse(markdown);
+        })
+        .catch(error => {
+            document.getElementById("content").innerHTML = "<p>Error loading post.</p>";
+            console.error(error);
+        });
+    </script>
+    
 </body>
 </html>
