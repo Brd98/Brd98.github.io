@@ -2,4 +2,4 @@
 ---
 this is a test post
 
-![Alt text](Screenshot.png)
+![Alt text](https://yourusername.github.io/MyBlog/Screenshot.png)
