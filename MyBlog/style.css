@@ -1,3 +1,17 @@
 body{
     background-color: #fef1e4;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.LPTitle{
+    background-color: black;
+    color: white;
+    text-align: center;
+
+}
+
+.Header{
+    background-color: black;
+    color: white;
+    text-align: center;
 }
