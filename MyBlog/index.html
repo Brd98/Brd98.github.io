@@ -24,22 +24,41 @@
     <div id="content"></div>
 
     <script>
-        const params = new URLSearchParams(window.location.search);
-        const post = params.get("post") || "posts/testpost.md";
+    const posts = [
+        "posts/testpost.md",
+        //"posts/27082025.md"
+    ];
 
-        fetch(post)
-        .then(response => {
-            if (!response.ok) throw new Error("Post not found");
-            return response.text();
-        })
-        .then(markdown => {
-            document.getElementById("content").innerHTML = marked.parse(markdown);
-        })
-        .catch(error => {
-            document.getElementById("content").innerHTML = "<p>Error loading post.</p>";
-            console.error(error);
-        });
+    const contentDiv = document.getElementById("content");
+    const latestPosts = posts.slice(0, 3);
+
+    async function loadPosts() {
+        contentDiv.innerHTML = "";
+        
+        for (const post of latestPosts) {
+            try {
+                const res = await fetch(post);
+                if (!res.ok) throw new Error("Post not found: " + post);
+                
+                const markdown = await res.text();
+                const postHTML = marked.parse(markdown);
+
+                const postDiv = document.createElement("div");
+                postDiv.className = "blog-post";
+                postDiv.innerHTML = postHTML;
+                
+                contentDiv.appendChild(postDiv);
+
+    } catch (err) {
+      console.error(err);
+    }
+  }
+}
+
+loadPosts();
     </script>
+
+<hr style="border: 3px solid black;">
 
 </body>
 </html>
